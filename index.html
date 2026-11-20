@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بنكك - تسجيل الدخول</title>
+    <title>Sense Café - العروض والطلبات</title>
     <style>
         :root {
-            --red-main: #c8102e;
-            --red-dark: #8f081e;
-            --red-deep: #6e0415;
-            --white: #ffffff;
-            --text-dark: #1e293b;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
+            --bg-dark: #120e0c;
+            --bg-card: #1d1613;
+            --accent: #e06d1b;
+            --accent-hover: #c5590d;
+            --text-main: #f8f5f2;
+            --text-sub: #b8aba2;
+            --border: #322620;
+            --success: #22c55e;
         }
 
         * {
@@ -22,202 +23,485 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        html, body {
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             min-height: 100vh;
-            width: 100%;
-            background: linear-gradient(165deg, var(--red-main) 0%, var(--red-dark) 55%, var(--red-deep) 100%);
-            color: var(--white);
+            padding-bottom: 32px;
         }
 
-        .screen {
-            min-height: 100vh;
-            width: 100%;
-            max-width: 440px;
-            margin: 0 auto;
-            padding: 28px 20px 32px;
+        /* الشريط العلوي والقائمة المنبسقة */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(18, 14, 12, 0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 16px;
             display: flex;
-            flex-direction: column;
             justify-content: space-between;
+            align-items: center;
         }
 
-        .top-brand {
-            text-align: center;
-            margin-top: 10px;
-            margin-bottom: 22px;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--text-main);
         }
 
-        .badge {
+        .brand-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .menu-btn {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: fixed;
+            top: 62px;
+            left: 16px;
+            width: 230px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+            z-index: 60;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            display: block;
+        }
+
+        .dropdown-item {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 13px 16px;
+            text-align: right;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(224, 109, 27, 0.14);
+        }
+
+        .dropdown-item.login-highlight {
+            color: var(--accent);
+            font-weight: 800;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        /* بانر العروض والإعلانات */
+        .promo-banner {
+            background: linear-gradient(135deg, #2a1a12 0%, #4a2511 100%);
+            border: 1px solid rgba(224, 109, 27, 0.4);
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 18px;
+        }
+
+        .promo-tag {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.16);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            padding: 5px 14px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
             border-radius: 999px;
-            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .promo-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .promo-desc {
+            font-size: 13px;
+            color: var(--text-sub);
+            line-height: 1.6;
             margin-bottom: 12px;
         }
 
-        .logo-text {
-            font-size: 36px;
-            font-weight: 900;
-            letter-spacing: 0.5px;
-            margin-bottom: 6px;
-        }
-
-        .welcome-msg {
-            font-size: 14px;
-            opacity: 0.92;
-        }
-
-        .login-card {
-            background: var(--white);
-            color: var(--text-dark);
-            border-radius: 22px;
-            padding: 22px 20px;
-            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
-        }
-
-        .field {
-            margin-bottom: 15px;
-        }
-
-        .field label {
-            display: block;
-            font-size: 13px;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: var(--text-dark);
-        }
-
-        .field input {
-            width: 100%;
-            padding: 12px 14px;
-            border: 1.5px solid var(--border);
+        .vip-note {
+            background: rgba(0, 0, 0, 0.25);
             border-radius: 12px;
-            font-size: 14px;
-            color: var(--text-dark);
-            background: #f8fafc;
+            padding: 10px 12px;
+            font-size: 12px;
+            color: #f3d2b3;
+            line-height: 1.5;
         }
 
-        .field input:focus {
-            outline: none;
-            border-color: var(--red-main);
-            background: var(--white);
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 13px;
-            border: none;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--red-main), var(--red-dark));
-            color: var(--white);
+        .section-title {
             font-size: 15px;
+            font-weight: 800;
+            margin: 18px 0 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-sub {
+            font-size: 11px;
+            color: var(--text-sub);
+            font-weight: 400;
+        }
+
+        /* كروت العروض والمنيو */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .item-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .item-info h3 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .item-info p {
+            font-size: 12px;
+            color: var(--text-sub);
+            margin-bottom: 6px;
+        }
+
+        .item-price {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .order-btn {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 9px 14px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .order-btn:hover {
+            background: var(--accent-hover);
+        }
+
+        .notice-box {
+            display: none;
+            margin-top: 14px;
+            background: rgba(224, 109, 27, 0.14);
+            border: 1px solid var(--accent);
+            color: #ffd8b8;
+            padding: 12px 14px;
+            border-radius: 12px;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* نافذة تسجيل الدخول */
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.72);
+            z-index: 80;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .modal-backdrop.open {
+            display: flex;
+        }
+
+        .modal-card {
+            width: 100%;
+            max-width: 380px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 20px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .modal-header h3 {
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-sub);
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-sub);
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 11px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--bg-dark);
+            color: var(--text-main);
+            font-size: 14px;
+        }
+
+        .login-submit {
+            width: 100%;
+            padding: 11px;
+            border: none;
+            border-radius: 10px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 14px;
             font-weight: 800;
             cursor: pointer;
             margin-top: 4px;
         }
 
-        .submit-btn:active {
-            transform: scale(0.99);
-        }
-
-        .error-msg {
+        .login-error {
             display: none;
-            margin-top: 12px;
-            padding: 10px;
-            border-radius: 10px;
-            background: #fef2f2;
-            color: #b91c1c;
-            border: 1px solid #fecaca;
+            margin-top: 10px;
             font-size: 12px;
+            color: #f87171;
             text-align: center;
-            font-weight: 600;
         }
 
-        .bottom-actions {
-            margin-top: 22px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-
-        .action-box {
-            background: rgba(255, 255, 255, 0.14);
-            border: 1px solid rgba(255, 255, 255, 0.22);
-            border-radius: 14px;
-            padding: 12px 8px;
+        .demo-creds {
+            margin-top: 10px;
+            font-size: 11px;
+            color: var(--text-sub);
             text-align: center;
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--white);
-        }
-
-        .footer-note {
-            margin-top: 16px;
-            text-align: center;
-            font-size: 12px;
-            opacity: 0.85;
         }
     </style>
 </head>
 <body>
 
-<div class="screen">
-    <div>
-        <div class="top-brand">
-            <div class="badge">نموذج واجهة تجريبي</div>
-            <div class="logo-text">بنكك</div>
-            <div class="welcome-msg">مرحباً بك، أدخل بياناتك للمتابعة</div>
+    <!-- شريط علوي مع قائمة منبسقة -->
+    <header class="navbar">
+        <div class="brand">
+            <span class="brand-dot"></span>
+            <span>Sense Café</span>
+        </div>
+        <button class="menu-btn" id="menuToggle">القائمة ☰</button>
+    </header>
+
+    <nav class="dropdown-menu" id="dropdownMenu">
+        <button class="dropdown-item login-highlight" id="openLoginFromMenu">تسجيل الدخول (زبون معتمد)</button>
+        <a href="#offers" class="dropdown-item">العروض والإعلانات</a>
+        <a href="#menu" class="dropdown-item">المنيو والأصناف</a>
+        <button class="dropdown-item" id="howToJoinBtn">كيف أحصل على حساب؟</button>
+    </nav>
+
+    <main class="container">
+        <!-- إعلان وعرض رئيسي -->
+        <section class="promo-banner" id="offers">
+            <span class="promo-tag">عرض خاص في Sense</span>
+            <h1 class="promo-title">أهلاً بك في Sense Café</h1>
+            <p class="promo-desc">
+                تصفح عروضنا اليومية والمشروبات والطلبات المميزة. الطلب المباشر أونلاين متاح للزبائن المعتمدين.
+            </p>
+            <div class="vip-note">
+                <strong>معلومة للعملاء:</strong> حساب الطلب الأونلاين يُمنح بعد أول زيارة وطلب لك داخل الكافي لتأكيد اعتمادك كزبون.
+            </div>
+        </section>
+
+        <!-- قسم العروض والمنيو -->
+        <div class="section-title" id="menu">
+            <span>العروض والأصناف المتاحة</span>
+            <span class="section-sub">لزبائن Sense المعتمدين</span>
         </div>
 
-        <div class="login-card">
-            <form id="bankakLoginForm">
-                <div class="field">
-                    <label for="accountId">رقم الحساب / اسم المستخدم</label>
-                    <input type="text" id="accountId" placeholder="مثال: 100200" required>
+        <div class="cards-grid">
+            <div class="item-card">
+                <div class="item-info">
+                    <h3>عرض الصباح المميز</h3>
+                    <p>مشروب ساخن مختار + سناك طازج</p>
+                    <div class="item-price">عرض ساري اليوم</div>
                 </div>
+                <button class="order-btn" data-item="عرض الصباح المميز">اطلب الآن</button>
+            </div>
 
-                <div class="field">
-                    <label for="pinCode">كلمة المرور</label>
-                    <input type="password" id="pinCode" placeholder="••••" required>
+            <div class="item-card">
+                <div class="item-info">
+                    <h3>ركن القهوة والبارد</h3>
+                    <p>تحضير طازج حسب الطلب من الكافي</p>
+                    <div class="item-price">متاح للزبائن</div>
                 </div>
+                <button class="order-btn" data-item="ركن القهوة والبارد">اطلب الآن</button>
+            </div>
 
-                <button type="submit" class="submit-btn">تسجيل الدخول</button>
-
-                <div class="error-msg" id="errorMsg">
-                    البيانات غير صحيحة. جرّب (100200) وكلمة المرور (1234).
+            <div class="item-card">
+                <div class="item-info">
+                    <h3>باقة المجموعات والونسة</h3>
+                    <p>طلب مجمع مناسب للجلسات والمجموعات</p>
+                    <div class="item-price">عرض خاص</div>
                 </div>
+                <button class="order-btn" data-item="باقة المجموعات والونسة">اطلب الآن</button>
+            </div>
+        </div>
+
+        <div class="notice-box" id="visitorNotice"></div>
+    </main>
+
+    <!-- نافذة تسجيل الدخول -->
+    <div class="modal-backdrop" id="loginModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>تسجيل دخول الزبائن</h3>
+                <button class="close-btn" id="closeLoginModal">✕</button>
+            </div>
+            <form id="senseLoginForm">
+                <div class="form-group">
+                    <label for="usernameInput">اسم المستخدم (Username)</label>
+                    <input type="text" id="usernameInput" placeholder="أدخل اسم المستخدم المعتمد" required>
+                </div>
+                <div class="form-group">
+                    <label for="passwordInput">كلمة المرور</label>
+                    <input type="password" id="passwordInput" placeholder="••••" required>
+                </div>
+                <button type="submit" class="login-submit">دخول إلى صفحة الطلبات</button>
+                <div class="login-error" id="loginError">اسم المستخدم أو كلمة المرور غير صحيحة.</div>
+                <div class="demo-creds">تجربة: <strong>sense_vip</strong> / <strong>1234</strong></div>
             </form>
         </div>
-
-        <div class="bottom-actions">
-            <div class="action-box">بنكك PAY</div>
-            <div class="action-box">سحب بدون بطاقة</div>
-            <div class="action-box">الفروع والوكلاء</div>
-        </div>
     </div>
 
-    <div class="footer-note">
-        بيانات التجربة: <strong>100200</strong> / <strong>1234</strong>
-    </div>
-</div>
+    <script>
+        const menuToggle = document.getElementById("menuToggle");
+        const dropdownMenu = document.getElementById("dropdownMenu");
+        const loginModal = document.getElementById("loginModal");
+        const openLoginFromMenu = document.getElementById("openLoginFromMenu");
+        const closeLoginModal = document.getElementById("closeLoginModal");
+        const visitorNotice = document.getElementById("visitorNotice");
+        const howToJoinBtn = document.getElementById("howToJoinBtn");
 
-<script>
-    document.getElementById("bankakLoginForm").addEventListener("submit", function(e) {
-        e.preventDefault();
+        // فتح وإغلاق القائمة المنبسقة
+        menuToggle.addEventListener("click", function(e) {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle("open");
+        });
 
-        const userVal = document.getElementById("accountId").value.trim();
-        const passVal = document.getElementById("pinCode").value.trim();
-        const errorMsg = document.getElementById("errorMsg");
+        document.addEventListener("click", function() {
+            dropdownMenu.classList.remove("open");
+        });
 
-        if (userVal === "100200" && passVal === "1234") {
-            localStorage.setItem("bankak_user", userVal);
-            window.location.href = "p2.html";
-        } else {
-            errorMsg.style.display = "block";
-        }
-    });
-</script>
+        dropdownMenu.addEventListener("click", function(e) {
+            e.stopPropagation();
+        });
 
+        // فتح نافذة تسجيل الدخول من القائمة
+        openLoginFromMenu.addEventListener("click", function() {
+            dropdownMenu.classList.remove("open");
+            loginModal.classList.add("open");
+        });
+
+        closeLoginModal.addEventListener("click", function() {
+            loginModal.classList.remove("open");
+        });
+
+        howToJoinBtn.addEventListener("click", function() {
+            dropdownMenu.classList.remove("open");
+            visitorNotice.style.display = "block";
+            visitorNotice.textContent = "للحصول على حساب طلب أونلاين، قم بزيارة Sense Café وإتمام أول طلب هناك ليتم اعتماد حسابك.";
+        });
+
+        // عند ضغط الزائر على "اطلب الآن"
+        document.querySelectorAll(".order-btn").forEach(function(btn) {
+            btn.addEventListener("click", function() {
+                const selectedItem = btn.getAttribute("data-item");
+                const activeCustomer = localStorage.getItem("sense_customer");
+
+                if (activeCustomer) {
+                    localStorage.setItem("sense_selected_item", selectedItem);
+                    window.location.href = "p2.html";
+                } else {
+                    visitorNotice.style.display = "block";
+                    visitorNotice.innerHTML = 'الطلب المباشر لـ <strong>' + selectedItem + '</strong> متاح للزبائن المعتمدين فقط بعد أول زيارة للكافي. إذا لديك حساب، افتح <strong>القائمة</strong> ثم <strong>تسجيل الدخول</strong>.';
+                }
+            });
+        });
+
+        // التحقق من بيانات تسجيل الدخول والانتقال إلى p2.html
+        document.getElementById("senseLoginForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const user = document.getElementById("usernameInput").value.trim();
+            const pass = document.getElementById("passwordInput").value.trim();
+            const loginError = document.getElementById("loginError");
+
+            // حساب تجريبي مبدئي (لاحقاً يُربط بقاعدة بيانات الزبائن المعتمدين)
+            if (user === "sense_vip" && pass === "1234") {
+                loginError.style.display = "none";
+                localStorage.setItem("sense_customer", user);
+                window.location.href = "p2.html";
+            } else {
+                loginError.style.display = "block";
+            }
+        });
+    </script>
 </body>
 </html>
