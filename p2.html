@@ -3,57 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مرحباً بك</title>
+    <title>بنكك - الصفحة الرئيسية</title>
     <style>
-        body {
+        :root {
+            --primary: #d91c24;
+            --primary-dark: #a81219;
+            --bg-light: #f4f6f9;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+        }
+
+        body {
+            background-color: var(--bg-light);
             display: flex;
             justify-content: center;
+            min-height: 100vh;
+            padding: 16px;
+        }
+
+        .app-shell {
+            width: 100%;
+            max-width: 410px;
+            background: #ffffff;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.12);
+            border: 1px solid var(--border);
+            align-self: flex-start;
+        }
+
+        .home-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: #ffffff;
+            padding: 24px 22px 64px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
+            margin-bottom: 14px;
         }
-        .welcome-card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            padding: 40px 50px;
-            border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+
+        .greeting {
+            font-size: 16px;
+            font-weight: 700;
         }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: 600;
         }
-        p {
-            font-size: 1.2em;
-            margin-bottom: 25px;
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .sub-info {
+            font-size: 12px;
             opacity: 0.9;
         }
-        a {
-            display: inline-block;
-            padding: 10px 25px;
-            background-color: #ffffff;
-            color: #764ba2;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: transform 0.2s;
+
+        .balance-card {
+            background: #ffffff;
+            margin: -44px 18px 0;
+            padding: 18px;
+            border-radius: 18px;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+            border: 1px solid var(--border);
         }
-        a:hover {
-            transform: scale(1.05);
+
+        .balance-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .toggle-btn {
+            background: #f1f5f9;
+            border: none;
+            color: var(--text-dark);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .balance-amount {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .acc-number {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .section-title {
+            padding: 20px 18px 10px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .services-grid {
+            padding: 0 18px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .service-card {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px 8px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .tx-list {
+            padding: 0 18px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .tx-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #ffffff;
+            font-size: 13px;
+        }
+
+        .tx-title {
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+
+        .tx-date {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .tx-amount-out {
+            font-weight: 700;
+            color: #dc2626;
+        }
+
+        .tx-amount-in {
+            font-weight: 700;
+            color: #16a34a;
         }
     </style>
 </head>
 <body>
 
-<div class="welcome-card">
-    <h1>مرحباً بك! 🎉</h1>
-    <p>تم تسجيل دخولك بنجاح إلى النظام.</p>
-    <a href="index.html">تسجيل الخروج</a>
+<div class="app-shell">
+    <div class="home-header">
+        <div class="header-top">
+            <div class="greeting" id="welcomeText">مرحباً بك</div>
+            <button class="logout-btn" id="logoutBtn">خروج</button>
+        </div>
+        <div class="sub-info">حساب بنكك النشط • آخر دخول اليوم</div>
+    </div>
+
+    <div class="balance-card">
+        <div class="balance-top">
+            <span>الرصيد المتاح</span>
+            <button class="toggle-btn" id="toggleBalanceBtn">إخفاء / إظهار</button>
+        </div>
+        <div class="balance-amount" id="balanceDisplay">1,450,000.00 SDG</div>
+        <div class="acc-number" id="accountDisplay">رقم الحساب: 100200</div>
+    </div>
+
+    <div class="section-title">الخدمات السريعة</div>
+    <div class="services-grid">
+        <div class="service-card">تحويل حسابات</div>
+        <div class="service-card">بنكك PAY</div>
+        <div class="service-card">سحب نقدي</div>
+        <div class="service-card">دفع الفواتير</div>
+        <div class="service-card">كشف حساب</div>
+        <div class="service-card">إدارة البطاقات</div>
+    </div>
+
+    <div class="section-title">آخر العمليات</div>
+    <div class="tx-list">
+        <div class="tx-item">
+            <div>
+                <div class="tx-title">تحويل صادر - خدمة التحويل</div>
+                <div class="tx-date">اليوم • 03:15 PM</div>
+            </div>
+            <div class="tx-amount-out">- 45,000 SDG</div>
+        </div>
+        <div class="tx-item">
+            <div>
+                <div class="tx-title">إيداع / تحويل وارد</div>
+                <div class="tx-date">أمس • 11:40 AM</div>
+            </div>
+            <div class="tx-amount-in">+ 120,000 SDG</div>
+        </div>
+    </div>
 </div>
+
+<script>
+    const savedUser = localStorage.getItem("bankak_user") || "100200";
+    document.getElementById("welcomeText").textContent = "مرحباً بك، " + savedUser;
+    document.getElementById("accountDisplay").textContent = "رقم الحساب: " + savedUser;
+
+    let isHidden = false;
+    const balanceEl = document.getElementById("balanceDisplay");
+    const realBalance = balanceEl.textContent;
+
+    document.getElementById("toggleBalanceBtn").addEventListener("click", function() {
+        isHidden = !isHidden;
+        balanceEl.textContent = isHidden ? "•••••••• SDG" : realBalance;
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", function() {
+        localStorage.removeItem("bankak_user");
+        window.location.href = "index.html";
+    });
+</script>
 
 </body>
 </html>
