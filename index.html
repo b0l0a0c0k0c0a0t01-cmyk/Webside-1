@@ -6,9 +6,10 @@
     <title>بنكك - تسجيل الدخول</title>
     <style>
         :root {
-            --primary: #d91c24;
-            --primary-dark: #a81219;
-            --bg-light: #f4f6f9;
+            --red-main: #c8102e;
+            --red-dark: #8f081e;
+            --red-deep: #6e0415;
+            --white: #ffffff;
             --text-dark: #1e293b;
             --text-muted: #64748b;
             --border: #e2e8f0;
@@ -21,146 +22,202 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        body {
-            background-color: var(--bg-light);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        html, body {
             min-height: 100vh;
-            padding: 16px;
-        }
-
-        .phone-frame {
             width: 100%;
-            max-width: 390px;
-            background: #ffffff;
-            border-radius: 28px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.12);
-            border: 1px solid var(--border);
+            background: linear-gradient(165deg, var(--red-main) 0%, var(--red-dark) 55%, var(--red-deep) 100%);
+            color: var(--white);
         }
 
-        .top-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: #ffffff;
-            padding: 32px 24px 28px;
+        .screen {
+            min-height: 100vh;
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto;
+            padding: 28px 20px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .top-brand {
             text-align: center;
+            margin-top: 10px;
+            margin-bottom: 22px;
         }
 
-        .brand-badge {
+        .badge {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.18);
-            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.16);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 5px 14px;
             border-radius: 999px;
             font-size: 12px;
             margin-bottom: 12px;
-            letter-spacing: 0.3px;
         }
 
-        .brand-title {
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 4px;
-        }
-
-        .brand-sub {
-            font-size: 13px;
-            opacity: 0.9;
-        }
-
-        .form-container {
-            padding: 24px;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-dark);
+        .logo-text {
+            font-size: 36px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
             margin-bottom: 6px;
         }
 
-        .form-group input {
+        .welcome-msg {
+            font-size: 14px;
+            opacity: 0.92;
+        }
+
+        .login-card {
+            background: var(--white);
+            color: var(--text-dark);
+            border-radius: 22px;
+            padding: 22px 20px;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+        }
+
+        .field {
+            margin-bottom: 15px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text-dark);
+        }
+
+        .field input {
             width: 100%;
             padding: 12px 14px;
             border: 1.5px solid var(--border);
             border-radius: 12px;
             font-size: 14px;
             color: var(--text-dark);
-            transition: border-color 0.2s;
+            background: #f8fafc;
         }
 
-        .form-group input:focus {
+        .field input:focus {
             outline: none;
-            border-color: var(--primary);
+            border-color: var(--red-main);
+            background: var(--white);
         }
 
-        .btn-login {
+        .submit-btn {
             width: 100%;
             padding: 13px;
-            background-color: var(--primary);
-            color: #ffffff;
             border: none;
             border-radius: 12px;
+            background: linear-gradient(135deg, var(--red-main), var(--red-dark));
+            color: var(--white);
             font-size: 15px;
-            font-weight: 700;
+            font-weight: 800;
             cursor: pointer;
-            margin-top: 6px;
-            transition: background-color 0.2s;
+            margin-top: 4px;
         }
 
-        .btn-login:hover {
-            background-color: var(--primary-dark);
+        .submit-btn:active {
+            transform: scale(0.99);
         }
 
-        .error-box {
+        .error-msg {
             display: none;
             margin-top: 12px;
-            padding: 10px 12px;
+            padding: 10px;
             border-radius: 10px;
-            background-color: #fef2f2;
+            background: #fef2f2;
             color: #b91c1c;
             border: 1px solid #fecaca;
-            font-size: 13px;
+            font-size: 12px;
             text-align: center;
-        }
-
-        .quick-tools {
-            margin-top: 22px;
-            padding-top: 18px;
-            border-top: 1px dashed var(--border);
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            text-align: center;
-        }
-
-        .tool-item {
-            background: #f8fafc;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 10px 6px;
-            font-size: 11px;
-            color: var(--text-dark);
             font-weight: 600;
         }
 
-        .demo-hint {
-            margin-top: 16px;
-            font-size: 12px;
-            color: var(--text-muted);
+        .bottom-actions {
+            margin-top: 22px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .action-box {
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 14px;
+            padding: 12px 8px;
             text-align: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .footer-note {
+            margin-top: 16px;
+            text-align: center;
+            font-size: 12px;
+            opacity: 0.85;
         }
     </style>
 </head>
 <body>
 
-<div class="phone-frame">
-    <div class="top-header">
-        <div class="brand-badge">نموذج واجهة تجريبي</div>
-        <div class="brand-title">بنكك</div>
-        <div class="brand-sub">مرحباً بك، أدخل بياناتك للم
+<div class="screen">
+    <div>
+        <div class="top-brand">
+            <div class="badge">نموذج واجهة تجريبي</div>
+            <div class="logo-text">بنكك</div>
+            <div class="welcome-msg">مرحباً بك، أدخل بياناتك للمتابعة</div>
+        </div>
+
+        <div class="login-card">
+            <form id="bankakLoginForm">
+                <div class="field">
+                    <label for="accountId">رقم الحساب / اسم المستخدم</label>
+                    <input type="text" id="accountId" placeholder="مثال: 100200" required>
+                </div>
+
+                <div class="field">
+                    <label for="pinCode">كلمة المرور</label>
+                    <input type="password" id="pinCode" placeholder="••••" required>
+                </div>
+
+                <button type="submit" class="submit-btn">تسجيل الدخول</button>
+
+                <div class="error-msg" id="errorMsg">
+                    البيانات غير صحيحة. جرّب (100200) وكلمة المرور (1234).
+                </div>
+            </form>
+        </div>
+
+        <div class="bottom-actions">
+            <div class="action-box">بنكك PAY</div>
+            <div class="action-box">سحب بدون بطاقة</div>
+            <div class="action-box">الفروع والوكلاء</div>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        بيانات التجربة: <strong>100200</strong> / <strong>1234</strong>
+    </div>
+</div>
+
+<script>
+    document.getElementById("bankakLoginForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const userVal = document.getElementById("accountId").value.trim();
+        const passVal = document.getElementById("pinCode").value.trim();
+        const errorMsg = document.getElementById("errorMsg");
+
+        if (userVal === "100200" && passVal === "1234") {
+            localStorage.setItem("bankak_user", userVal);
+            window.location.href = "p2.html";
+        } else {
+            errorMsg.style.display = "block";
+        }
+    });
+</script>
+
+</body>
+</html>
