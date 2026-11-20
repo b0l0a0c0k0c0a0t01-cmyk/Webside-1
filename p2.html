@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بنكك - الصفحة الرئيسية</title>
+    <title>Sense Café - بوابة الزبائن المعتمدين</title>
     <style>
         :root {
-            --primary: #d91c24;
-            --primary-dark: #a81219;
-            --bg-light: #f4f6f9;
-            --text-dark: #1e293b;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
+            --bg: #0f0b09;
+            --surface: #1a1310;
+            --surface-2: #241a15;
+            --accent: #e06d1b;
+            --accent-soft: rgba(224, 109, 27, 0.15);
+            --text: #faf6f2;
+            --muted: #b5a69b;
+            --line: #33251e;
+            --ok: #22c55e;
         }
 
         * {
@@ -22,236 +25,471 @@
         }
 
         body {
-            background-color: var(--bg-light);
-            display: flex;
-            justify-content: center;
+            background: radial-gradient(circle at top, #27170f 0%, var(--bg) 55%);
+            color: var(--text);
             min-height: 100vh;
+            padding-bottom: 44px;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            background: rgba(15, 11, 9, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line);
+            padding: 13px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-weight: 800;
+            font-size: 17px;
+        }
+
+        .brand-mark {
+            width: 11px;
+            height: 11px;
+            border-radius: 3px;
+            transform: rotate(45deg);
+            background: var(--accent);
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .pill-btn {
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--line);
+            padding: 7px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .pill-logout {
+            background: rgba(239, 68, 68, 0.14);
+            border-color: rgba(239, 68, 68, 0.35);
+            color: #fca5a5;
+        }
+
+        .wrap {
+            max-width: 480px;
+            margin: 0 auto;
             padding: 16px;
         }
 
-        .app-shell {
-            width: 100%;
-            max-width: 410px;
-            background: #ffffff;
-            border-radius: 28px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.12);
-            border: 1px solid var(--border);
-            align-self: flex-start;
-        }
-
-        .home-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: #ffffff;
-            padding: 24px 22px 64px;
-        }
-
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .hero-card {
+            background: linear-gradient(135deg, #2b180f 0%, #3d1f11 100%);
+            border: 1px solid rgba(224, 109, 27, 0.42);
+            border-radius: 20px;
+            padding: 18px;
             margin-bottom: 14px;
         }
 
-        .greeting {
-            font-size: 16px;
-            font-weight: 700;
-        }
-
-        .logout-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.35);
-            padding: 6px 12px;
+        .status-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(34, 197, 94, 0.15);
+            color: #86efac;
+            border: 1px solid rgba(34, 197, 94, 0.35);
+            padding: 4px 10px;
             border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .hero-card h1 {
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 4px;
+        }
+
+        .hero-card p {
             font-size: 12px;
-            cursor: pointer;
-            font-weight: 600;
+            color: var(--muted);
+            line-height: 1.5;
         }
 
-        .logout-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
         }
 
-        .sub-info {
-            font-size: 12px;
-            opacity: 0.9;
+        .stat-box {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 15px;
+            padding: 13px;
         }
 
-        .balance-card {
-            background: #ffffff;
-            margin: -44px 18px 0;
-            padding: 18px;
+        .stat-label {
+            font-size: 11px;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .stat-val {
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--line);
             border-radius: 18px;
-            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
-            border: 1px solid var(--border);
+            padding: 16px;
+            margin-bottom: 16px;
         }
 
-        .balance-top {
+        .panel-title {
+            font-size: 15px;
+            font-weight: 800;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: var(--text-muted);
-            font-size: 12px;
-            margin-bottom: 8px;
         }
 
-        .toggle-btn {
-            background: #f1f5f9;
-            border: none;
-            color: var(--text-dark);
-            padding: 4px 10px;
-            border-radius: 8px;
-            font-size: 11px;
+        .quick-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .chip {
+            background: var(--surface-2);
+            border: 1px solid var(--line);
+            color: var(--text);
+            padding: 7px 11px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
             cursor: pointer;
+        }
+
+        .chip.active {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+            color: #ffd5b5;
+        }
+
+        .field {
+            margin-bottom: 12px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 6px;
             font-weight: 600;
         }
 
-        .balance-amount {
-            font-size: 24px;
+        .field select,
+        .field input {
+            width: 100%;
+            padding: 11px 12px;
+            border-radius: 11px;
+            border: 1px solid var(--line);
+            background: var(--bg);
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .field select:focus,
+        .field input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 14px;
             font-weight: 800;
-            color: var(--text-dark);
-            margin-bottom: 6px;
+            cursor: pointer;
         }
 
-        .acc-number {
+        .btn-primary:hover {
+            filter: brightness(1.07);
+        }
+
+        .toast {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(34, 197, 94, 0.14);
+            border: 1px solid rgba(34, 197, 94, 0.35);
+            color: #86efac;
             font-size: 12px;
-            color: var(--text-muted);
+            text-align: center;
+            font-weight: 700;
         }
 
-        .section-title {
-            padding: 20px 18px 10px;
+        .order-card {
+            background: var(--surface-2);
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+
+        .order-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .order-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .order-title {
             font-size: 14px;
             font-weight: 700;
-            color: var(--text-dark);
         }
 
-        .services-grid {
-            padding: 0 18px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-
-        .service-card {
-            background: #f8fafc;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 14px 8px;
-            text-align: center;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-dark);
-        }
-
-        .tx-list {
-            padding: 0 18px 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .tx-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 14px;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            background: #ffffff;
-            font-size: 13px;
-        }
-
-        .tx-title {
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 2px;
-        }
-
-        .tx-date {
+        .badge-pending {
+            background: var(--accent-soft);
+            color: #fdba74;
+            padding: 3px 9px;
+            border-radius: 999px;
             font-size: 11px;
-            color: var(--text-muted);
+            font-weight: 700;
         }
 
-        .tx-amount-out {
-            font-weight: 700;
-            color: #dc2626;
+        .order-sub {
+            font-size: 12px;
+            color: var(--muted);
         }
 
-        .tx-amount-in {
-            font-weight: 700;
-            color: #16a34a;
+        .order-remark {
+            margin-top: 6px;
+            font-size: 12px;
+            color: #f4d3b8;
+        }
+
+        .empty-box {
+            text-align: center;
+            padding: 18px 10px;
+            color: var(--muted);
+            font-size: 13px;
         }
     </style>
 </head>
 <body>
 
-<div class="app-shell">
-    <div class="home-header">
-        <div class="header-top">
-            <div class="greeting" id="welcomeText">مرحباً بك</div>
-            <button class="logout-btn" id="logoutBtn">خروج</button>
+    <header class="topbar">
+        <div class="brand">
+            <span class="brand-mark"></span>
+            <span>Sense Café</span>
         </div>
-        <div class="sub-info">حساب بنكك النشط • آخر دخول اليوم</div>
-    </div>
-
-    <div class="balance-card">
-        <div class="balance-top">
-            <span>الرصيد المتاح</span>
-            <button class="toggle-btn" id="toggleBalanceBtn">إخفاء / إظهار</button>
+        <div class="top-actions">
+            <a href="index.html" class="pill-btn">العروض</a>
+            <button class="pill-btn pill-logout" id="logoutBtn">خروج</button>
         </div>
-        <div class="balance-amount" id="balanceDisplay">1,450,000.00 SDG</div>
-        <div class="acc-number" id="accountDisplay">رقم الحساب: 100200</div>
-    </div>
+    </header>
 
-    <div class="section-title">الخدمات السريعة</div>
-    <div class="services-grid">
-        <div class="service-card">تحويل حسابات</div>
-        <div class="service-card">بنكك PAY</div>
-        <div class="service-card">سحب نقدي</div>
-        <div class="service-card">دفع الفواتير</div>
-        <div class="service-card">كشف حساب</div>
-        <div class="service-card">إدارة البطاقات</div>
-    </div>
+    <main class="wrap">
+        <section class="hero-card">
+            <div class="status-chip">● حساب زبون معتمد</div>
+            <h1 id="welcomeTitle">مرحباً بك</h1>
+            <p>اختر صنفك المفضل أو عرض اليوم، وحدد الكمية والملاحظات لإرسال طلبك مباشرة.</p>
+        </section>
 
-    <div class="section-title">آخر العمليات</div>
-    <div class="tx-list">
-        <div class="tx-item">
-            <div>
-                <div class="tx-title">تحويل صادر - خدمة التحويل</div>
-                <div class="tx-date">اليوم • 03:15 PM</div>
+        <div class="stats-row">
+            <div class="stat-box">
+                <div class="stat-label">إجمالي طلباتي</div>
+                <div class="stat-val" id="totalOrdersCount">0</div>
             </div>
-            <div class="tx-amount-out">- 45,000 SDG</div>
-        </div>
-        <div class="tx-item">
-            <div>
-                <div class="tx-title">إيداع / تحويل وارد</div>
-                <div class="tx-date">أمس • 11:40 AM</div>
+            <div class="stat-box">
+                <div class="stat-label">حالة الخدمة</div>
+                <div class="stat-val">متاح</div>
             </div>
-            <div class="tx-amount-in">+ 120,000 SDG</div>
         </div>
-    </div>
-</div>
 
-<script>
-    const savedUser = localStorage.getItem("bankak_user") || "100200";
-    document.getElementById("welcomeText").textContent = "مرحباً بك، " + savedUser;
-    document.getElementById("accountDisplay").textContent = "رقم الحساب: " + savedUser;
+        <section class="panel">
+            <div class="panel-title">
+                <span>طلب سريع</span>
+            </div>
 
-    let isHidden = false;
-    const balanceEl = document.getElementById("balanceDisplay");
-    const realBalance = balanceEl.textContent;
+            <div class="quick-chips" id="quickChips">
+                <button type="button" class="chip active" data-val="عرض الصباح المميز">عرض الصباح</button>
+                <button type="button" class="chip" data-val="ركن القهوة والبارد">القهوة والبارد</button>
+                <button type="button" class="chip" data-val="باقة المجموعات والونسة">باقة المجموعات</button>
+            </div>
 
-    document.getElementById("toggleBalanceBtn").addEventListener("click", function() {
-        isHidden = !isHidden;
-        balanceEl.textContent = isHidden ? "•••••••• SDG" : realBalance;
-    });
+            <form id="orderForm">
+                <div class="field">
+                    <label for="itemSelect">الصنف أو العرض</label>
+                    <select id="itemSelect">
+                        <option value="عرض الصباح المميز">عرض الصباح المميز</option>
+                        <option value="ركن القهوة والبارد">ركن القهوة والبارد</option>
+                        <option value="باقة المجموعات والونسة">باقة المجموعات والونسة</option>
+                    </select>
+                </div>
 
-    document.getElementById("logoutBtn").addEventListener("click", function() {
-        localStorage.removeItem("bankak_user");
-        window.location.href = "index.html";
-    });
-</script>
+                <div class="field">
+                    <label for="qtyInput">الكمية</label>
+                    <input type="number" id="qtyInput" min="1" max="50" value="1" required>
+                </div>
 
+                <div class="field">
+                    <label for="noteInput">ملاحظات (اختياري)</label>
+                    <input type="text" id="noteInput" placeholder="مثال: بدون سكر، أو وقت الاستلام">
+                </div>
+
+                <button type="submit" class="btn-primary">إرسال الطلب</button>
+                <div class="toast" id="orderToast">تمت إضافة طلبك إلى قائمة الطلبات بنجاح.</div>
+            </form>
+        </section>
+
+        <section class="panel">
+            <div class="panel-title">
+                <span>سجل طلباتي</span>
+            </div>
+            <div id="ordersContainer"></div>
+        </section>
+    </main>
+
+    <script>
+        const customer = localStorage.getItem("sense_customer");
+        if (!customer) {
+            window.location.href = "index.html";
+        }
+
+        document.getElementById("welcomeTitle").textContent = "مرحباً بك، " + customer;
+
+        const itemSelect = document.getElementById("itemSelect");
+        const chips = document.querySelectorAll(".chip");
+
+        function syncChips(selectedVal) {
+            chips.forEach(function(chip) {
+                chip.classList.toggle("active", chip.getAttribute("data-val") === selectedVal);
+            });
+        }
+
+        chips.forEach(function(chip) {
+            chip.addEventListener("click", function() {
+                const val = chip.getAttribute("data-val");
+                itemSelect.value = val;
+                syncChips(val);
+            });
+        });
+
+        itemSelect.addEventListener("change", function() {
+            syncChips(itemSelect.value);
+        });
+
+        const preselected = localStorage.getItem("sense_selected_item");
+        if (preselected) {
+            for (let i = 0; i < itemSelect.options.length; i++) {
+                if (itemSelect.options[i].value === preselected) {
+                    itemSelect.selectedIndex = i;
+                    syncChips(preselected);
+                    break;
+                }
+            }
+            localStorage.removeItem("sense_selected_item");
+        }
+
+        const storageKey = "sense_orders_" + customer;
+
+        function loadOrders() {
+            try {
+                return JSON.parse(localStorage.getItem(storageKey)) || [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveOrders(list) {
+            localStorage.setItem(storageKey, JSON.stringify(list));
+        }
+
+        function render() {
+            const orders = loadOrders();
+            const container = document.getElementById("ordersContainer");
+            document.getElementById("totalOrdersCount").textContent = orders.length;
+
+            if (orders.length === 0) {
+                container.innerHTML = '<div class="empty-box">لا توجد طلبات حتى الآن. ابدأ بإرسال طلبك الأول.</div>';
+                return;
+            }
+
+            container.innerHTML = orders.map(function(o) {
+                return `
+                    <div class="order-card">
+                        <div class="order-head">
+                            <div class="order-title">${o.item} × ${o.qty}</div>
+                            <span class="badge-pending">${o.status}</span>
+                        </div>
+                        <div class="order-sub">الوقت: ${o.time}</div>
+                        ${o.note ? `<div class="order-remark">ملاحظة: ${o.note}</div>` : ""}
+                    </div>
+                `;
+            }).join("");
+        }
+
+        document.getElementById("orderForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const item = itemSelect.value;
+            const qty = parseInt(document.getElementById("qtyInput").value, 10) || 1;
+            const note = document.getElementById("noteInput").value.trim();
+            const time = new Date().toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" });
+
+            const orders = loadOrders();
+            orders.unshift({
+                id: Date.now(),
+                item: item,
+                qty: qty,
+                note: note,
+                status: "بانتظار التأكيد",
+                time: time
+            });
+
+            saveOrders(orders);
+            render();
+
+            document.getElementById("noteInput").value = "";
+            document.getElementById("qtyInput").value = "1";
+
+            const toast = document.getElementById("orderToast");
+            toast.style.display = "block";
+            setTimeout(function() {
+                toast.style.display = "none";
+            }, 2400);
+        });
+
+        document.getElementById("logoutBtn").addEventListener("click", function() {
+            localStorage.removeItem("sense_customer");
+            window.location.href = "index.html";
+        });
+
+        render();
+    </script>
 </body>
 </html>
