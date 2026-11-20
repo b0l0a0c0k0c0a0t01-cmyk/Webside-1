@@ -125,7 +125,7 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      min-height: 200px;
+      min-height: 210px;
       background-size: cover;
       background-position: center;
     }
@@ -137,7 +137,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(to top, rgba(12, 9, 7, 0.95) 40%, rgba(12, 9, 7, 0.45) 100%);
+      background: linear-gradient(to top, rgba(12, 9, 7, 0.95) 42%, rgba(12, 9, 7, 0.45) 100%);
       z-index: 1;
     }
 
@@ -156,6 +156,10 @@
 
     .slide-3 {
       background-image: linear-gradient(125deg, rgba(20,15,12,0.94), rgba(64,41,17,0.86));
+    }
+
+    .slide-4 {
+      background-image: url('1795200634444.jpg'); /* صورة خدمة التوصيل */
     }
 
     .slide-badge {
@@ -320,24 +324,6 @@
       overflow: hidden;
     }
 
-    .card-banner {
-      width: 100%;
-      height: 140px;
-      background-size: cover;
-      background-position: center;
-      border-radius: 8px;
-      margin-bottom: 14px;
-      border: 1px solid rgba(212, 175, 55, 0.2);
-    }
-
-    .card-banner.pizza-bg {
-      background-image: url('1795199857977.jpg'); /* صورة البيتزا */
-    }
-
-    .card-banner.coffee-bg {
-      background-image: url('1795199858174.jpg'); /* صورة القهوة */
-    }
-
     .card-header {
       display: inline-flex;
       align-items: center;
@@ -464,6 +450,13 @@
             <p>للطلبات الخاصة والمناسبات وتجهيز التورتات تواصل مباشرة مع الإدارة على الرقم أسفل الصفحة.</p>
           </div>
         </div>
+        <div class="slide slide-4">
+          <div class="slide-content">
+            <span class="slide-badge">🛵 خدمة التوصيل (دلفري)</span>
+            <h2>نصل إليك أينما كنت بطعم طازج وساخن</h2>
+            <p>اطلب وجبتك أو مشروبك المفضل الآن عبر الاتصال المباشر على الرقم 0918472318.</p>
+          </div>
+        </div>
       </div>
 
       <button class="slider-btn prev-btn" onclick="moveSlide(-1)" aria-label="السابق">❮</button>
@@ -494,7 +487,6 @@
 
       <!-- بيتزا -->
       <section class="menu-card" id="pizza">
-        <div class="card-banner pizza-bg"></div>
         <div class="card-header">🍕 بيتزا</div>
         <div class="menu-item"><span class="item-name">هوت دوق كبير</span><span class="item-dots"></span><span class="item-price">60,000 <span class="currency">SDG</span></span></div>
         <div class="menu-item"><span class="item-name">هوت دوق وسط</span><span class="item-dots"></span><span class="item-price">55,000 <span class="currency">SDG</span></span></div>
@@ -525,7 +517,6 @@
 
       <!-- مشروبات ساخنة وباردة -->
       <section class="menu-card full-width" id="drinks">
-        <div class="card-banner coffee-bg"></div>
         <div class="card-header">🥤 مشروبات ساخنة & باردة</div>
         <div class="menu-item"><span class="item-name">شاي</span><span class="item-dots"></span><span class="item-price">7,000 <span class="currency">SDG</span></span></div>
         <div class="menu-item"><span class="item-name">شاي لبن</span><span class="item-dots"></span><span class="item-price">12,000 <span class="currency">SDG</span></span></div>
@@ -630,12 +621,6 @@
             item.style.display = 'none';
           }
         });
-
-        // إخفاء أو إظهار البانر أيضاً حسب البحث لتوفير المساحة
-        const banner = card.querySelector('.card-banner');
-        if (banner) {
-          banner.style.display = hasVisibleItem && query === '' ? 'block' : 'none';
-        }
 
         card.style.display = hasVisibleItem ? 'block' : 'none';
       });
